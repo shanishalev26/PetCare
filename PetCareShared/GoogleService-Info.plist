@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>904278839840-jo1tehet750rcej49fonvkhcgsapsoog.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.904278839840-jo1tehet750rcej49fonvkhcgsapsoog</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDUuvBn8rSglWT0ebLi1WhwYe53rqDAoGQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>904278839840</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>shani.PetCareShared</string>
+	<key>PROJECT_ID</key>
+	<string>petcareshared</string>
+	<key>STORAGE_BUCKET</key>
+	<string>petcareshared.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:904278839840:ios:2d93c7e990ad6b8de02245</string>
+</dict>
+</plist>
