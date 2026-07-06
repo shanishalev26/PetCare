@@ -14,16 +14,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1D80C2402FDEEB4A005FDE49 /* PetCareShared.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetCareShared.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D80C2402FDEEB4A005FDE49 /* PetCare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetCare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		1D80C2522FDEEB4A005FDE49 /* Exceptions for "PetCareShared" folder in "PetCareShared" target */ = {
+		1D80C2522FDEEB4A005FDE49 /* Exceptions for "PetCareShared" folder in "PetCare" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 1D80C23F2FDEEB4A005FDE49 /* PetCareShared */;
+			target = 1D80C23F2FDEEB4A005FDE49 /* PetCare */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -31,7 +31,7 @@
 		1D80C2422FDEEB4A005FDE49 /* PetCareShared */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				1D80C2522FDEEB4A005FDE49 /* Exceptions for "PetCareShared" folder in "PetCareShared" target */,
+				1D80C2522FDEEB4A005FDE49 /* Exceptions for "PetCareShared" folder in "PetCare" target */,
 			);
 			path = PetCareShared;
 			sourceTree = "<group>";
@@ -64,7 +64,7 @@
 		1D80C2412FDEEB4A005FDE49 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D80C2402FDEEB4A005FDE49 /* PetCareShared.app */,
+				1D80C2402FDEEB4A005FDE49 /* PetCare.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,9 +72,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D80C23F2FDEEB4A005FDE49 /* PetCareShared */ = {
+		1D80C23F2FDEEB4A005FDE49 /* PetCare */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D80C2532FDEEB4A005FDE49 /* Build configuration list for PBXNativeTarget "PetCareShared" */;
+			buildConfigurationList = 1D80C2532FDEEB4A005FDE49 /* Build configuration list for PBXNativeTarget "PetCare" */;
 			buildPhases = (
 				1D80C23C2FDEEB4A005FDE49 /* Sources */,
 				1D80C23D2FDEEB4A005FDE49 /* Frameworks */,
@@ -87,7 +87,7 @@
 			fileSystemSynchronizedGroups = (
 				1D80C2422FDEEB4A005FDE49 /* PetCareShared */,
 			);
-			name = PetCareShared;
+			name = PetCare;
 			packageProductDependencies = (
 				1D7FB1702FDEF3CF00162727 /* FirebaseAuth */,
 				1D7FB1722FDEF3CF00162727 /* FirebaseFirestore */,
@@ -95,7 +95,7 @@
 				1D7FB17B2FDF002C00162727 /* GoogleSignInSwift */,
 			);
 			productName = PetCareShared;
-			productReference = 1D80C2402FDEEB4A005FDE49 /* PetCareShared.app */;
+			productReference = 1D80C2402FDEEB4A005FDE49 /* PetCare.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -113,7 +113,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 1D80C23B2FDEEB4A005FDE49 /* Build configuration list for PBXProject "PetCareShared" */;
+			buildConfigurationList = 1D80C23B2FDEEB4A005FDE49 /* Build configuration list for PBXProject "PetCare" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -131,7 +131,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1D80C23F2FDEEB4A005FDE49 /* PetCareShared */,
+				1D80C23F2FDEEB4A005FDE49 /* PetCare */,
 			);
 		};
 /* End PBXProject section */
@@ -345,7 +345,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D80C23B2FDEEB4A005FDE49 /* Build configuration list for PBXProject "PetCareShared" */ = {
+		1D80C23B2FDEEB4A005FDE49 /* Build configuration list for PBXProject "PetCare" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D80C2562FDEEB4A005FDE49 /* Debug */,
@@ -354,7 +354,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1D80C2532FDEEB4A005FDE49 /* Build configuration list for PBXNativeTarget "PetCareShared" */ = {
+		1D80C2532FDEEB4A005FDE49 /* Build configuration list for PBXNativeTarget "PetCare" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D80C2542FDEEB4A005FDE49 /* Debug */,
