@@ -17,6 +17,9 @@ class AddPetController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var addpet_TF_breed: UITextField!
     @IBOutlet weak var addpet_TF_birthDate: UITextField!
     @IBOutlet weak var addpet_BTN_save: UIButton!
+    @IBOutlet weak var addpet_TF_weight: UITextField!
+    @IBOutlet weak var addpet_SC_gender: UISegmentedControl!
+    @IBOutlet weak var addpet_TF_notes: UITextField!
     @IBOutlet weak var addpet_LBL_error: UILabel!
 
     override func viewDidLoad() {
@@ -27,6 +30,13 @@ class AddPetController: UIViewController, UITextFieldDelegate {
         addpet_TF_birthDate.delegate = self
         addpet_TF_birthDate.keyboardType = .numberPad
         addpet_TF_birthDate.placeholder = "DD/MM/YYYY"
+        
+        addpet_LBL_error.text = ""
+                addpet_LBL_error.isHidden = true
+                addpet_TF_birthDate.delegate = self
+                addpet_TF_birthDate.keyboardType = .numberPad
+                addpet_TF_birthDate.placeholder = "DD/MM/YYYY"
+                addpet_SC_gender.selectedSegmentIndex = -1
 
     }
     
@@ -59,8 +69,12 @@ class AddPetController: UIViewController, UITextFieldDelegate {
         let type = addpet_TF_type.text ?? ""
         let breed = addpet_TF_breed.text ?? ""
         let birthDate = addpet_TF_birthDate.text ?? ""
+        
+        let weightText = (addpet_TF_weight.text ?? "").trimmingCharacters(in: .whitespaces)
+        let gender = addpet_SC_gender.selectedSegmentIndex >= 0 ? addpet_SC_gender.titleForSegment(at: addpet_SC_gender.selectedSegmentIndex) ?? "" : ""
+        let notes = addpet_TF_notes.text ?? ""
 
-        guard !name.isEmpty, !type.isEmpty, !breed.isEmpty, !birthDate.isEmpty else {
+        guard !name.isEmpty, !type.isEmpty, !breed.isEmpty, !birthDate.isEmpty, !weightText.isEmpty, !gender.isEmpty else {
             addpet_LBL_error.text = "Please fill in all fields"
             addpet_LBL_error.isHidden = false
             return
@@ -77,6 +91,12 @@ class AddPetController: UIViewController, UITextFieldDelegate {
             return
         }
 
+        guard let weight = Double(weightText) else {
+            addpet_LBL_error.text = "Please enter a valid weight"
+            addpet_LBL_error.isHidden = false
+            return
+        }
+
         guard let userId = Auth.auth().currentUser?.uid else { return }
 
         let db = Firestore.firestore()
@@ -87,6 +107,9 @@ class AddPetController: UIViewController, UITextFieldDelegate {
             "type": type,
             "breed": breed,
             "birthDate": birthDate,
+            "weight": weight,
+            "gender": gender,
+            "notes": notes,
             "ownerId": userId
         ]
 
