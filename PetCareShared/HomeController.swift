@@ -40,12 +40,6 @@ class HomeController: UIViewController {
         performSegue(withIdentifier: "toSchedule", sender: nil)
     }
     @IBAction func home_BTN_myPetsClicked(_ sender: UIButton) {
-        performSegue(withIdentifier: "toMyPets", sender: nil)
-    }
-    @IBAction func home_BTN_sharedClicked(_ sender: UIButton) {
-        performSegue(withIdentifier: "toShared", sender: nil)
-    }
-    @IBAction func home_BTN_viewProfileClicked(_ sender: UIButton) {
         performSegue(withIdentifier: "toPetProfile", sender: nil)
     }
     @IBAction func home_BTN_viewAllScheduleClicked(_ sender: UIButton) {
@@ -75,7 +69,7 @@ class HomeController: UIViewController {
 
                 self.petId = firstPetId
                 self.loadUpcomingEvent(petId: firstPetId)
-                self.loadTodo(petId: firstPetId)
+                self.loadCareNotes(petId: firstPetId)
                 self.loadHealthOverview(petId: firstPetId)
 
                 Firestore.firestore()
@@ -85,12 +79,14 @@ class HomeController: UIViewController {
                         guard let data = petDoc?.data() else { return }
                         let name = data["name"] as? String ?? ""
                         let type = data["type"] as? String ?? ""
+                        let breed = data["breed"] as? String ?? ""
                         let birthDate = data["birthDate"] as? String ?? ""
+                        let age = birthDate.parsedAsBirthDate()?.petAgeText() ?? "Not added yet"
 
-                        // Firestore runs on a background thread — UI updates must happen on the main thread
                         DispatchQueue.main.async {
                             self.home_LBL_petName.text = name.capitalized
-                            self.home_LBL_petInfo.text = "\(type.capitalized) • \(birthDate.parsedAsBirthDate()?.petAgeText() ?? "")"
+                            self.home_LBL_petInfo.numberOfLines = 0
+                            self.home_LBL_petInfo.text = "\(type.capitalized) • \(breed.capitalized)\n\(age)"
                         }
                     }
             }
@@ -128,65 +124,44 @@ class HomeController: UIViewController {
                         self.home_LBL_upcomingTitle.text = type
                         self.home_LBL_upcomingDate.text = formatter.string(from: ts.dateValue())
                     } else {
-                        self.home_LBL_upcomingTitle.text = "Not added yet"
+                        self.home_LBL_upcomingTitle.text = "No upcoming appointments"
                         self.home_LBL_upcomingDate.text = ""
                     }
                 }
             }
     }
 
-    func loadTodo(petId: String) {
+    func loadCareNotes(petId: String) {
         Firestore.firestore()
             .collection("pets").document(petId)
-            .collection("tasks")
-            .whereField("done", isEqualTo: false)
-            .limit(to: 1)
-            .getDocuments { snapshot, _ in
-                let doc = snapshot?.documents.first
-                let title = doc?.data()["title"] as? String
+            .getDocument { petDoc, _ in
+                let notes = petDoc?.data()?["notes"] as? String
                 DispatchQueue.main.async {
-                    if let title = title {
-                        self.home_LBL_reminderTitle.text = title
-                        self.home_LBL_reminderDate.text = ""
+                    self.home_LBL_reminderDate.isHidden = true
+                    if let notes = notes, !notes.isEmpty {
+                        self.home_LBL_reminderTitle.text = notes
                     } else {
-                        self.home_LBL_reminderTitle.text = "No tasks"
-                        self.home_LBL_reminderDate.text = ""
+                        self.home_LBL_reminderTitle.text = "No notes added yet"
                     }
                 }
             }
     }
 
     func loadHealthOverview(petId: String) {
-        let petRef = Firestore.firestore().collection("pets").document(petId)
-        let now = Timestamp(date: Date())
-        let fmt = DateFormatter()
-        fmt.dateFormat = "MMM d, yyyy"
+        Firestore.firestore()
+            .collection("pets").document(petId)
+            .getDocument { petDoc, _ in
+                let data = petDoc?.data()
+                let weightVal = data?["weight"] as? Double
+                let birthDate = data?["birthDate"] as? String ?? ""
+                let gender = data?["gender"] as? String
+                let age = birthDate.parsedAsBirthDate()?.petAgeText() ?? "Not added yet"
 
-        petRef.getDocument { petDoc, _ in
-            let weightVal = petDoc?.data()?["weight"] as? Double
-
-            petRef.collection("events")
-                .whereField("type", isEqualTo: "Vaccination")
-                .whereField("date", isLessThanOrEqualTo: now)
-                .order(by: "date", descending: true)
-                .limit(to: 1)
-                .getDocuments { vaccSnap, _ in
-                    let vaccTs = vaccSnap?.documents.first?.data()["date"] as? Timestamp
-
-                    petRef.collection("events")
-                        .whereField("type", isEqualTo: "Vet Appointment")
-                        .whereField("date", isLessThanOrEqualTo: now)
-                        .order(by: "date", descending: true)
-                        .limit(to: 1)
-                        .getDocuments { vetSnap, _ in
-                            let vetTs = vetSnap?.documents.first?.data()["date"] as? Timestamp
-                            DispatchQueue.main.async {
-                                self.home_LBL_weight.text = weightVal.map { "\($0) kg" } ?? "Not added yet"
-                                self.home_LBL_lastVaccination.text = vaccTs.map { fmt.string(from: $0.dateValue()) } ?? "Not added yet"
-                                self.home_LBL_lastVetVisit.text = vetTs.map { fmt.string(from: $0.dateValue()) } ?? "Not added yet"
-                            }
-                        }
+                DispatchQueue.main.async {
+                    self.home_LBL_lastVaccination.text = weightVal.map { "\($0) kg" } ?? "Not added yet"
+                    self.home_LBL_weight.text = age
+                    self.home_LBL_lastVetVisit.text = gender?.capitalized ?? "Not added yet"
                 }
-        }
+            }
     }
 }
