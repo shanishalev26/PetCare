@@ -1,6 +1,6 @@
 //
 //  HomeController.swift
-//  PetCareShared
+//  PetCare
 //
 //  Created by שני שלו on 15/06/2026.
 //
@@ -41,9 +41,6 @@ class HomeController: UIViewController {
     }
     @IBAction func home_BTN_myPetsClicked(_ sender: UIButton) {
         performSegue(withIdentifier: "toPetProfile", sender: nil)
-    }
-    @IBAction func home_BTN_viewAllScheduleClicked(_ sender: UIButton) {
-        performSegue(withIdentifier: "toSchedule", sender: nil)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

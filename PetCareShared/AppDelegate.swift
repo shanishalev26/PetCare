@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  PetCareShared
+//  PetCare
 //
 //  Created by שני שלו on 14/06/2026.
 //
