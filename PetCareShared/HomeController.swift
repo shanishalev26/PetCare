@@ -36,6 +36,13 @@ class HomeController: UIViewController {
         loadGreeting()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !petId.isEmpty {
+            loadCareNotes(petId: petId)
+        }
+    }
+
     @IBAction func home_BTN_scheduleClicked(_ sender: UIButton) {
         performSegue(withIdentifier: "toSchedule", sender: nil)
     }
@@ -132,14 +139,12 @@ class HomeController: UIViewController {
         Firestore.firestore()
             .collection("pets").document(petId)
             .getDocument { petDoc, _ in
-                let notes = petDoc?.data()?["notes"] as? String
+                let notes = petDoc?.data()?["notes"] as? String ?? ""
+                let bullets = notes.split(separator: "\n", omittingEmptySubsequences: true).map { "• \($0)" }
                 DispatchQueue.main.async {
                     self.home_LBL_reminderDate.isHidden = true
-                    if let notes = notes, !notes.isEmpty {
-                        self.home_LBL_reminderTitle.text = notes
-                    } else {
-                        self.home_LBL_reminderTitle.text = "No notes added yet"
-                    }
+                    self.home_LBL_reminderTitle.numberOfLines = 0
+                    self.home_LBL_reminderTitle.text = bullets.isEmpty ? "No notes added yet" : bullets.joined(separator: "\n")
                 }
             }
     }
