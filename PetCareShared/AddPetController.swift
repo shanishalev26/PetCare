@@ -38,6 +38,13 @@ class AddPetController: UIViewController, UITextFieldDelegate {
                 addpet_TF_birthDate.placeholder = "DD/MM/YYYY"
                 addpet_SC_gender.selectedSegmentIndex = -1
 
+        let tapToDismiss = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapToDismiss.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapToDismiss)
+    }
+
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

@@ -54,6 +54,9 @@ class PetProfileViewController: UIViewController {
         present(alert, animated: true)
     }
 
+    @IBAction func petprofile_BTN_backClicked(_ sender: UIButton) {
+        dismiss(animated: true)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         loadPet()

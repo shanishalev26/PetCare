@@ -40,11 +40,12 @@ class HomeController: UIViewController {
         super.viewWillAppear(animated)
         if !petId.isEmpty {
             loadCareNotes(petId: petId)
+            loadUpcomingEvent(petId: petId)
         }
     }
 
     @IBAction func home_BTN_scheduleClicked(_ sender: UIButton) {
-        performSegue(withIdentifier: "toSchedule", sender: nil)
+        tabBarController?.selectedIndex = 1
     }
     @IBAction func home_BTN_myPetsClicked(_ sender: UIButton) {
         performSegue(withIdentifier: "toPetProfile", sender: nil)
@@ -53,10 +54,6 @@ class HomeController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toPetProfile",
            let vc = segue.destination as? PetProfileViewController {
-            vc.petId = petId
-        }
-        if segue.identifier == "toSchedule",
-           let vc = segue.destination as? ScheduleViewController {
             vc.petId = petId
         }
     }

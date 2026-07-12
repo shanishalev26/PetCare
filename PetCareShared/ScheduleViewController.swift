@@ -97,13 +97,6 @@ class ScheduleViewController: UIViewController, UITableViewDelegate, UITableView
             }
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toAddEvent",
-           let vc = segue.destination as? AddEventViewController {
-            vc.petId = petId
-        }
-    }
-
     private func loadPetThenEvents() {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         Firestore.firestore().collection("users").document(userId)
@@ -120,7 +113,11 @@ class ScheduleViewController: UIViewController, UITableViewDelegate, UITableView
             .collection("events")
             .order(by: "date")
             .getDocuments { snapshot, _ in
-                self.events = snapshot?.documents.map { $0.data() } ?? []
+                let allEvents = snapshot?.documents.map { $0.data() } ?? []
+                let now = Date()
+                let upcoming = allEvents.filter { (($0["date"] as? Timestamp)?.dateValue() ?? .distantPast) >= now }
+                let past = allEvents.filter { (($0["date"] as? Timestamp)?.dateValue() ?? .distantPast) < now }
+                self.events = upcoming + past
                 DispatchQueue.main.async {
                     self.schedule_TBL_events.reloadData()
                 }
@@ -144,9 +141,19 @@ class ScheduleViewController: UIViewController, UITableViewDelegate, UITableView
         let ts = event["date"] as? Timestamp
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d, yyyy • HH:mm"
-        cell.event_LBL_type.text = type
-        cell.event_LBL_type.textColor = .label
-        cell.event_LBL_date.text = ts.map { formatter.string(from: $0.dateValue()) } ?? ""
+        let dateText = ts.map { formatter.string(from: $0.dateValue()) } ?? ""
+        let isPast = (ts?.dateValue() ?? .distantFuture) < Date()
+
+        if isPast {
+            let strikethrough: [NSAttributedString.Key: Any] = [.strikethroughStyle: NSUnderlineStyle.single.rawValue]
+            cell.event_LBL_type.attributedText = NSAttributedString(string: type, attributes: strikethrough)
+            cell.event_LBL_date.attributedText = NSAttributedString(string: dateText, attributes: strikethrough)
+            cell.event_LBL_type.textColor = .secondaryLabel
+        } else {
+            cell.event_LBL_type.text = type
+            cell.event_LBL_date.text = dateText
+            cell.event_LBL_type.textColor = .label
+        }
         return cell
     }
 }
