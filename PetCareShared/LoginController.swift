@@ -47,6 +47,8 @@ class LoginController: UIViewController {
     
     
     @IBAction func clickedLogin(_ sender: UIButton) {
+        login_LBL_error.isHidden = true
+
         let email = login_TF_email.text ?? ""
         let password = login_TF_password.text ?? ""
 
