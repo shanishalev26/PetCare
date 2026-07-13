@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="Media/logo.jpg" width="125" alt="PetCare app icon">
+<img src="Media/logo.png" width="125" alt="PetCare app icon">
 
 # PetCare
 
@@ -165,7 +165,7 @@ Firestore Security Rules ensure that authenticated users can access only their o
 PetCare/
 ├── README.md
 ├── Media/
-│   ├── logo.jpg
+│   ├── logo.png
 │   ├── signup.png
 │   ├── home.png
 │   ├── schedule.png
