@@ -40,3 +40,8 @@ extension Date {
         }
     }
 }
+
+extension Notification.Name {
+    static let petNotesDidChange = Notification.Name("petNotesDidChange")
+    static let petEventDidAdd = Notification.Name("petEventDidAdd")
+}

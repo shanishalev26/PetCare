@@ -29,9 +29,26 @@ class HomeController: UIViewController {
     @IBOutlet weak var home_LBL_healthGender: UILabel!
 
     var petId: String = ""
+    
+    private var upcomingEventDate: Date?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handlePetNotesDidChange(_:)),
+            name: .petNotesDidChange,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handlePetEventDidAdd(_:)),
+            name: .petEventDidAdd,
+            object: nil
+        )
+
         loadPet()
         loadGreeting()
     }
@@ -108,23 +125,27 @@ class HomeController: UIViewController {
 
     func loadUpcomingEvent(petId: String) {
         let now = Timestamp(date: Date())
+
         Firestore.firestore()
-            .collection("pets").document(petId)
+            .collection("pets")
+            .document(petId)
             .collection("events")
             .whereField("date", isGreaterThanOrEqualTo: now)
             .order(by: "date")
             .limit(to: 1)
             .getDocuments { snapshot, _ in
-                let doc = snapshot?.documents.first
-                let type = doc?.data()["type"] as? String
-                let timestamp = doc?.data()["date"] as? Timestamp
+                let document = snapshot?.documents.first
+                let type = document?.data()["type"] as? String
+                let timestamp = document?.data()["date"] as? Timestamp
+
                 DispatchQueue.main.async {
-                    if let type = type, let ts = timestamp {
-                        let formatter = DateFormatter()
-                        formatter.dateFormat = "MMM d, yyyy • HH:mm"
-                        self.home_LBL_upcomingTitle.text = type
-                        self.home_LBL_upcomingDate.text = formatter.string(from: ts.dateValue())
+                    if let type, let timestamp {
+                        self.displayUpcomingEvent(
+                            type: type,
+                            date: timestamp.dateValue()
+                        )
                     } else {
+                        self.upcomingEventDate = nil
                         self.home_LBL_upcomingTitle.text = "No upcoming appointments"
                         self.home_LBL_upcomingDate.text = ""
                     }
@@ -134,14 +155,13 @@ class HomeController: UIViewController {
 
     func loadCareNotes(petId: String) {
         Firestore.firestore()
-            .collection("pets").document(petId)
+            .collection("pets")
+            .document(petId)
             .getDocument { petDoc, _ in
                 let notes = petDoc?.data()?["notes"] as? String ?? ""
-                let bullets = notes.split(separator: "\n", omittingEmptySubsequences: true).map { "• \($0)" }
+
                 DispatchQueue.main.async {
-                    self.home_LBL_reminderDate.isHidden = true
-                    self.home_LBL_careNotes.numberOfLines = 0
-                    self.home_LBL_careNotes.text = bullets.isEmpty ? "No notes added yet" : bullets.joined(separator: "\n")
+                    self.displayCareNotes(notes)
                 }
             }
     }
@@ -162,5 +182,64 @@ class HomeController: UIViewController {
                     self.home_LBL_healthGender.text = gender?.capitalized ?? "Not added yet"
                 }
             }
+    }
+    
+    private func displayCareNotes(_ notes: String) {
+        let bullets = notes
+            .split(separator: "\n", omittingEmptySubsequences: true)
+            .map { "• \($0)" }
+
+        home_LBL_reminderDate.isHidden = true
+        home_LBL_careNotes.numberOfLines = 0
+        home_LBL_careNotes.text = bullets.isEmpty
+            ? "No notes added yet"
+            : bullets.joined(separator: "\n")
+    }
+    
+    private func displayUpcomingEvent(type: String, date: Date) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, yyyy • HH:mm"
+
+        upcomingEventDate = date
+        home_LBL_upcomingTitle.text = type
+        home_LBL_upcomingDate.text = formatter.string(from: date)
+    }
+    
+    ///
+    @objc private func handlePetNotesDidChange(_ notification: Notification) {
+        guard
+            let changedPetId = notification.userInfo?["petId"] as? String,
+            let notes = notification.userInfo?["notes"] as? String,
+            changedPetId == petId
+        else {
+            return
+        }
+
+        displayCareNotes(notes)
+    }
+
+    ///
+    @objc private func handlePetEventDidAdd(_ notification: Notification) {
+        guard
+            let changedPetId = notification.userInfo?["petId"] as? String,
+            let type = notification.userInfo?["type"] as? String,
+            let date = notification.userInfo?["date"] as? Date,
+            changedPetId == petId,
+            date >= Date()
+        else {
+            return
+        }
+
+        // Update only if this is now the closest upcoming event
+        if let currentDate = upcomingEventDate, currentDate <= date {
+            return
+        }
+
+        displayUpcomingEvent(type: type, date: date)
+    }
+    
+    ///
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }

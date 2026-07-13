@@ -108,7 +108,10 @@ class PetProfileViewController: UIViewController {
     }
 
     func addNote(_ note: String) {
-        let existingLines = currentNotes.split(separator: "\n", omittingEmptySubsequences: true).map { String($0) }
+        let existingLines = currentNotes
+            .split(separator: "\n", omittingEmptySubsequences: true)
+            .map { String($0) }
+
         let updatedNotes = (existingLines + [note]).joined(separator: "\n")
 
         Firestore.firestore()
@@ -116,9 +119,17 @@ class PetProfileViewController: UIViewController {
             .document(petId)
             .updateData(["notes": updatedNotes]) { error in
                 guard error == nil else { return }
+
                 self.currentNotes = updatedNotes
-                DispatchQueue.main.async {
-                    self.displayNotes(updatedNotes)
+
+                DispatchQueue.main.async
+                {self.displayNotes(updatedNotes)
+
+                    NotificationCenter.default.post(
+                        name: .petNotesDidChange,object: nil,userInfo: ["petId": self.petId,
+                            "notes": updatedNotes
+                        ]
+                    )
                 }
             }
     }

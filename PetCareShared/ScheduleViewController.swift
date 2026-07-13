@@ -74,27 +74,41 @@ class ScheduleViewController: UIViewController, UITableViewDelegate, UITableView
 
     @IBAction func schedule_BTN_saveEventClicked(_ sender: UIButton) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
-        let date = Timestamp(date: schedule_DTP_eventDate.date)
-        let notes = schedule_TF_eventNotes.text?.trimmingCharacters(in: .whitespaces) ?? ""
 
-        var data: [String: Any] = [
-            "type": selectedType,
-            "date": date,
-            "addedBy": userId,
-            "createdAt": Timestamp(date: Date())
-        ]
-        if !notes.isEmpty { data["notes"] = notes }
+            let eventType = selectedType
+            let eventDate = schedule_DTP_eventDate.date
+            let date = Timestamp(date: eventDate)
+            let notes = schedule_TF_eventNotes.text?
+                .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
 
-        Firestore.firestore()
-            .collection("pets").document(petId)
-            .collection("events")
-            .addDocument(data: data) { error in
-                guard error == nil else { return }
-                DispatchQueue.main.async {
-                    self.hideAddEventCard()
-                    self.loadEvents()
+            var data: [String: Any] = [
+                "type": eventType,
+                "date": date,
+                "addedBy": userId,
+                "createdAt": Timestamp(date: Date())]
+
+            if !notes.isEmpty {
+                data["notes"] = notes}
+
+            Firestore.firestore()
+                .collection("pets")
+                .document(petId)
+                .collection("events")
+                .addDocument(data: data) { error in
+                    guard error == nil else { return }
+
+                    DispatchQueue.main.async {
+                        self.hideAddEventCard()
+                        self.loadEvents()
+
+                        NotificationCenter.default.post(name: .petEventDidAdd,object: nil,userInfo: [
+                                "petId": self.petId,
+                                "type": eventType,
+                                "date": eventDate
+                            ]
+                        )
+                    }
                 }
-            }
     }
 
     private func loadPetThenEvents() {
