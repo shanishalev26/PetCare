@@ -24,8 +24,17 @@ class LoginController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         login_LBL_error.isHidden = true
+
+        // Dismiss the keyboard when tapping outside a text field (cancelsTouchesInView = false keeps buttons/fields tappable)
+        let tapToDismiss = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapToDismiss.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapToDismiss)
+    }
+
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
     }
 
     
@@ -105,7 +114,7 @@ class LoginController: UIViewController {
         login_LBL_error.isHidden = false
     }
     
-    ///////////
+    /////
     func createUserDocumentIfNeeded(firstName: String = "", lastName: String = "", completion: @escaping () -> Void) {
         guard let user = Auth.auth().currentUser else { return }
 
