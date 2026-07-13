@@ -30,13 +30,7 @@ class AddPetController: UIViewController, UITextFieldDelegate {
         addpet_TF_birthDate.delegate = self
         addpet_TF_birthDate.keyboardType = .numberPad
         addpet_TF_birthDate.placeholder = "DD/MM/YYYY"
-        
-        addpet_LBL_error.text = ""
-                addpet_LBL_error.isHidden = true
-                addpet_TF_birthDate.delegate = self
-                addpet_TF_birthDate.keyboardType = .numberPad
-                addpet_TF_birthDate.placeholder = "DD/MM/YYYY"
-                addpet_SC_gender.selectedSegmentIndex = -1
+        addpet_SC_gender.selectedSegmentIndex = -1
 
         let tapToDismiss = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tapToDismiss.cancelsTouchesInView = false

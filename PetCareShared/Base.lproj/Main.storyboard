@@ -35,7 +35,7 @@
             <objects>
                 <viewController id="wlZ-2z-W1T" customClass="ProfileViewController" customModule="PetCare" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aT9-R2-emI">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="793"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxH-0c-1g5">
@@ -552,7 +552,7 @@
             <objects>
                 <viewController id="rAF-N0-5NA" customClass="ScheduleViewController" customModule="PetCare" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cv3-5B-vs6">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="793"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Schedule" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uUL-Yl-loJ">
@@ -562,7 +562,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="erl-zq-34x">
-                                <rect key="frame" x="0.0" y="62.666666666666686" width="393" height="671.33333333333326"/>
+                                <rect key="frame" x="0.0" y="62.666666666666686" width="393" height="681.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="eventCell" textLabel="NKn-GA-2gR" detailTextLabel="NdP-ng-tQf" style="IBUITableViewCellStyleSubtitle" id="iZw-hu-06L" customClass="EventCell" customModule="PetCare" customModuleProvider="target">
@@ -610,10 +610,10 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N3p-hk-vbl">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="793"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sqEvtCard">
-                                        <rect key="frame" x="46.666666666666657" y="284.66666666666669" width="300" height="214"/>
+                                        <rect key="frame" x="46.666666666666657" y="289.66666666666669" width="300" height="214"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="sqEvtStack">
                                                 <rect key="frame" x="16" y="16" width="268" height="182"/>
@@ -1210,14 +1210,14 @@
             <objects>
                 <viewController id="j4V-sz-Lff" customClass="HomeController" customModule="PetCare" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0qn-wT-dCI">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="793"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qne-9G-oHb">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="734"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="744"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FQr-mS-Q65">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="826.66666666666663"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FQr-mS-Q65">
+                                        <rect key="frame" x="-8" y="-15" width="393" height="826.66666666666663"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi, Maya" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5SQ-Or-0kj">
                                                 <rect key="frame" x="25" y="20" width="88" height="30"/>
@@ -1511,7 +1511,7 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add vaccination" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Oi-vC-eAq">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add weight" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Oi-vC-eAq">
                                                                 <rect key="frame" x="4" y="67.333333333333258" width="109.66666666666667" height="14"/>
                                                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
                                                                 <color key="textColor" red="0.4941176471" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1546,7 +1546,7 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add weight" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="237-42-oAS">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add age" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="237-42-oAS">
                                                                 <rect key="frame" x="4" y="67.333333333333258" width="109.66666666666667" height="14"/>
                                                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
                                                                 <color key="textColor" red="0.4941176471" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1582,7 +1582,7 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Vet Visit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwX-sA-C4F">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add gender" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwX-sA-C4F">
                                                                 <rect key="frame" x="3.9999999999999716" y="67.333333333333258" width="109.66666666666667" height="14"/>
                                                                 <color key="tintColor" red="0.4941176471" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
@@ -1693,16 +1693,16 @@
                     <navigationItem key="navigationItem" id="ro2-wL-QM4"/>
                     <connections>
                         <outlet property="home_IMG_pet" destination="LGD-Wh-Lmv" id="dML-ia-aIz"/>
+                        <outlet property="home_LBL_careNotes" destination="dP1-Qp-Muo" id="47c-GB-wVr"/>
                         <outlet property="home_LBL_greeting" destination="5SQ-Or-0kj" id="qTL-EA-ypY"/>
-                        <outlet property="home_LBL_lastVaccination" destination="5Oi-vC-eAq" id="PGd-Lo-2Ll"/>
-                        <outlet property="home_LBL_lastVetVisit" destination="fwX-sA-C4F" id="Wdq-w3-8jF"/>
+                        <outlet property="home_LBL_healthAge" destination="237-42-oAS" id="cEh-kx-IMx"/>
+                        <outlet property="home_LBL_healthGender" destination="fwX-sA-C4F" id="Wdq-w3-8jF"/>
+                        <outlet property="home_LBL_healthWeight" destination="5Oi-vC-eAq" id="PGd-Lo-2Ll"/>
                         <outlet property="home_LBL_petInfo" destination="5Kp-fx-VvR" id="Zs9-gz-spp"/>
                         <outlet property="home_LBL_petName" destination="X3Q-6a-ym4" id="WuE-vK-skM"/>
                         <outlet property="home_LBL_reminderDate" destination="o3A-3Q-77n" id="baq-gj-Kzw"/>
-                        <outlet property="home_LBL_reminderTitle" destination="dP1-Qp-Muo" id="47c-GB-wVr"/>
                         <outlet property="home_LBL_upcomingDate" destination="pTE-Os-h7R" id="XgV-f0-Kc0"/>
                         <outlet property="home_LBL_upcomingTitle" destination="d0X-3c-ff9" id="C6F-Vc-xUK"/>
-                        <outlet property="home_LBL_weight" destination="237-42-oAS" id="cEh-kx-IMx"/>
                         <segue destination="4H9-TP-deO" kind="show" identifier="toPetProfile" id="hBd-a0-teF"/>
                     </connections>
                 </viewController>
@@ -2142,7 +2142,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="aBr-dU-qAI"/>
+        <segue reference="fnC-TX-JrI"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.left" catalog="system" width="128" height="95"/>

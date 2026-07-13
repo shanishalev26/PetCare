@@ -22,11 +22,11 @@ class HomeController: UIViewController {
 
     @IBOutlet weak var home_LBL_upcomingTitle: UILabel!
     @IBOutlet weak var home_LBL_upcomingDate: UILabel!
-    @IBOutlet weak var home_LBL_reminderTitle: UILabel!
+    @IBOutlet weak var home_LBL_careNotes: UILabel!
     @IBOutlet weak var home_LBL_reminderDate: UILabel!
-    @IBOutlet weak var home_LBL_lastVaccination: UILabel!
-    @IBOutlet weak var home_LBL_weight: UILabel!
-    @IBOutlet weak var home_LBL_lastVetVisit: UILabel!
+    @IBOutlet weak var home_LBL_healthWeight: UILabel!
+    @IBOutlet weak var home_LBL_healthAge: UILabel!
+    @IBOutlet weak var home_LBL_healthGender: UILabel!
 
     var petId: String = ""
 
@@ -140,8 +140,8 @@ class HomeController: UIViewController {
                 let bullets = notes.split(separator: "\n", omittingEmptySubsequences: true).map { "• \($0)" }
                 DispatchQueue.main.async {
                     self.home_LBL_reminderDate.isHidden = true
-                    self.home_LBL_reminderTitle.numberOfLines = 0
-                    self.home_LBL_reminderTitle.text = bullets.isEmpty ? "No notes added yet" : bullets.joined(separator: "\n")
+                    self.home_LBL_careNotes.numberOfLines = 0
+                    self.home_LBL_careNotes.text = bullets.isEmpty ? "No notes added yet" : bullets.joined(separator: "\n")
                 }
             }
     }
@@ -157,9 +157,9 @@ class HomeController: UIViewController {
                 let age = birthDate.parsedAsBirthDate()?.petAgeText() ?? "Not added yet"
 
                 DispatchQueue.main.async {
-                    self.home_LBL_lastVaccination.text = weightVal.map { "\($0) kg" } ?? "Not added yet"
-                    self.home_LBL_weight.text = age
-                    self.home_LBL_lastVetVisit.text = gender?.capitalized ?? "Not added yet"
+                    self.home_LBL_healthWeight.text = weightVal.map { "\($0) kg" } ?? "Not added yet"
+                    self.home_LBL_healthAge.text = age
+                    self.home_LBL_healthGender.text = gender?.capitalized ?? "Not added yet"
                 }
             }
     }
