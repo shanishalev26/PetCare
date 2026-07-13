@@ -76,7 +76,6 @@ _Click the link above to open the full application demonstration._
 - User profile and logout
 - Light and Dark Mode support
 
-```md
 ## Application Flow
 
 ```mermaid
@@ -100,7 +99,6 @@ flowchart LR
     D --> E["Schedule"]
     D --> F["Pet Profile"]
     D --> G["User Profile"]
-```
 ```
 
 ## Technologies
