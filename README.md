@@ -6,12 +6,9 @@
 
 ### A simple iOS app for managing a pet's profile, care notes, and upcoming events
 
-<br>
-
-![Swift](https://img.shields.io/badge/Swift-5.0-F05138?style=flat-square&logo=swift&logoColor=white)
-![Platform](https://img.shields.io/badge/Platform-iOS%2026.5-000000?style=flat-square&logo=apple&logoColor=white)
-![UIKit](https://img.shields.io/badge/UI-UIKit-7C74FF?style=flat-square)
-![Firebase](https://img.shields.io/badge/Backend-Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black)
+<p align="center">
+  Swift • UIKit • Firebase Authentication • Cloud Firestore
+</p>
 
 </div>
 
@@ -79,17 +76,31 @@ _Click the link above to open the full application demonstration._
 - User profile and logout
 - Light and Dark Mode support
 
+```md
 ## Application Flow
 
 ```mermaid
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#DCD6FF',
+    'primaryTextColor': '#2F2F3A',
+    'primaryBorderColor': '#8B80F9',
+    'lineColor': '#8B80F9',
+    'secondaryColor': '#EEF4FB',
+    'tertiaryColor': '#F7F4FF',
+    'fontFamily': 'Arial'
+  }
+}}%%
 flowchart LR
-    A[Login / Sign Up] --> B{Does the user have a pet?}
-    B -- No --> C[Add Pet]
-    B -- Yes --> D[Home]
+    A["Login / Sign Up"] --> B{"Does the user have a pet?"}
+    B -- No --> C["Add Pet"]
+    B -- Yes --> D["Home"]
     C --> D
-    D --> E[Schedule]
-    D --> F[Pet Profile]
-    D --> G[User Profile]
+    D --> E["Schedule"]
+    D --> F["Pet Profile"]
+    D --> G["User Profile"]
+```
 ```
 
 ## Technologies
